@@ -14,21 +14,24 @@ type Item struct {
 // Insert inserts new item into the btree.
 func (item *Item) Insert(index byte, value string) {
 
+	if index == item.index {
+		item.index = index
+		item.value = value
+	}
+
 	if index > item.index {
 		if item.right == nil {
 			item.right = &Item{index: index, value: value}
 		} else {
-			item.Insert(index, value)
+			item.right.Insert(index, value)
 		}
-		return
-	}
-
-	if item.left == nil {
-		item.left = &Item{index: index, value: value}
 	} else {
-		item.Insert(index, value)
+		if item.left == nil {
+			item.left = &Item{index: index, value: value}
+		} else {
+			item.left.Insert(index, value)
+		}
 	}
-	return
 }
 
 // Find returns value of the index.
