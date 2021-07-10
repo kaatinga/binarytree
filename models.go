@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/kaatinga/assets"
+)
 
 type Tree struct {
 	*Item
@@ -12,14 +15,14 @@ func (tree *Tree) Insert(index byte, value string) {
 		// the first item is added
 		tree.Item = &Item{index: index, value: value}
 		fmt.Println("root index was created:", index)
-		fmt.Printf("%#v\n",tree.Item)
+		fmt.Printf("%#v\n", tree.Item)
 	} else {
 		tree.Item.Insert(index, value)
 	}
 }
 
-func (tree *Tree) testValue(index byte, value string) {
-	tree.Insert(index, value)
+func (tree *Tree) testValue(index byte) {
+	tree.Insert(index, "value_of_index_"+assets.Byte2String(index))
 	fmt.Println("returned value:", tree.Find(index))
 	fmt.Println(counter)
 	counter = 0
