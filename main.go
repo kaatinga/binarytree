@@ -1,17 +1,11 @@
 package main
 
-import "fmt"
-
 func main() {
 
 	tree := Tree{}
 
-	tree.Insert(128, "test128")
-	fmt.Println(tree.Find(128))
-
-	tree.Insert(127, "test127")
-	fmt.Println(tree.Find(127))
-
-	tree.Insert(126, "test126")
-	fmt.Println(tree.Find(126))
+	tree.testValue(128, "test128")
+	tree.testValue(122, "test122")
+	tree.testValue(121, "test121")
+	tree.testValue(129, "test129")
 }
