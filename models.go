@@ -41,6 +41,7 @@ func (item *Item) Insert(index byte, value string) {
 		item.index = index
 		item.value = value
 		fmt.Println("current index was updated:", index)
+		return
 	}
 
 	if index > item.index {
