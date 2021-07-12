@@ -12,7 +12,7 @@ type Tree struct {
 func (tree *Tree) Insert(index byte, value string) {
 	if tree.Item == nil {
 
-		// the first item is added
+		// the first item is added, parent = nil
 		tree.Item = &Item{index: index, value: value}
 		fmt.Println("root index was created:", index)
 		fmt.Printf("%#v\n", tree.Item)
@@ -33,8 +33,10 @@ var counter uint
 type Item struct {
 	index byte
 	value string
+	parent *Item
 	left  *Item
 	right *Item
+	balance int
 }
 
 // Insert inserts new item into the btree.
@@ -49,14 +51,14 @@ func (item *Item) Insert(index byte, value string) {
 
 	if index > item.index {
 		if item.right == nil {
-			item.right = &Item{index: index, value: value}
+			item.right = &Item{index: index, value: value, parent: item}
 			fmt.Println("new index was created:", index)
 		} else {
 			item.right.Insert(index, value)
 		}
 	} else {
 		if item.left == nil {
-			item.left = &Item{index: index, value: value}
+			item.left = &Item{index: index, value: value, parent: item}
 			fmt.Println("new index was created:", index)
 		} else {
 			item.left.Insert(index, value)
